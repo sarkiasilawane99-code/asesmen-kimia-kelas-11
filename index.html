@@ -1,0 +1,1245 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>APLIKASI ASESMEN SUMATIF AKHIR TAHUN KIMIA - SMA NEGERI 46 MALUKU TENGAH</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .chem-formula sub { vertical-align: sub; font-size: 0.75em; }
+        .chem-formula sup { vertical-align: super; font-size: 0.75em; }
+        @media print {
+            .no-print { display: none !important; }
+            body { background: white !important; color: black !important; }
+        }
+    </style>
+</head>
+<body class="bg-slate-100 text-slate-800 min-h-screen flex flex-col justify-between">
+
+    <!-- Header / Navbar Utama -->
+    <header class="bg-blue-900 text-white shadow-md no-print">
+        <div class="max-w-7xl mx-auto px-4 py-3 flex flex-col sm:flex-row justify-between items-center">
+            <div class="flex items-center space-x-3 mb-2 sm:mb-0">
+                <div class="bg-blue-800 p-2 rounded-lg border border-blue-700">
+                    <i class="fa-solid fa-atom text-2xl text-cyan-400"></i>
+                </div>
+                <div>
+                    <h1 class="text-base sm:text-lg font-bold tracking-wide">SMA NEGERI 46 MALUKU TENGAH</h1>
+                    <p class="text-xs text-blue-200">Asesmen Sumatif Akhir Tahun (ASAT) Kimia Kelas XI Fase F</p>
+                </div>
+            </div>
+            <div class="flex items-center space-x-4 text-xs sm:text-sm">
+                <span class="bg-blue-800 px-3 py-1.5 rounded-full border border-blue-700">
+                    <i class="fa-solid fa-chalkboard-user mr-1 text-cyan-300"></i> Guru: <strong>Sarkia Silawane, S.Pd.</strong>
+                </span>
+                <button onclick="openTeacherModal()" class="bg-cyan-600 hover:bg-cyan-700 text-white px-3 py-1.5 rounded-lg transition shadow-sm font-medium flex items-center">
+                    <i class="fa-solid fa-gear mr-1"></i> Panel Guru
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Konten Utama Aplikasi -->
+    <main class="flex-grow flex items-center justify-center p-3 sm:p-6">
+        
+        <!-- 1. HALAMAN PEMBUKA / BERANDA -->
+        <div id="page-home" class="w-full max-w-3xl bg-white rounded-2xl shadow-xl overflow-hidden border border-slate-200">
+            <div class="bg-gradient-to-r from-blue-900 to-indigo-900 p-6 sm:p-8 text-white text-center relative">
+                <div class="absolute top-4 left-4 bg-white/10 p-3 rounded-full backdrop-blur-sm">
+                    <i class="fa-solid fa-flask-vial text-2xl text-cyan-300"></i>
+                </div>
+                <span class="bg-cyan-500/20 text-cyan-300 text-xs font-semibold px-3 py-1 rounded-full uppercase tracking-wider border border-cyan-400/30">Kurikulum Merdeka - Fase F</span>
+                <h2 class="text-2xl sm:text-3xl font-bold mt-3 mb-1">ASESMEN SUMATIF AKHIR TAHUN (ASAT)</h2>
+                <h3 class="text-lg sm:text-xl font-semibold text-blue-200">Mata Pelajaran: KIMIA KELAS XI</h3>
+                <p class="text-xs text-slate-300 mt-2">Satuan Pendidikan: SMA Negeri 46 Maluku Tengah</p>
+            </div>
+
+            <div class="p-6 sm:p-8 space-y-6">
+                <!-- Informasi Umum -->
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 text-center">
+                    <div class="bg-slate-50 p-4 rounded-xl border border-slate-200 shadow-sm">
+                        <i class="fa-solid fa-list-check text-blue-600 text-xl mb-1"></i>
+                        <p class="text-xs text-slate-500">Jumlah Soal</p>
+                        <p class="text-base font-bold text-slate-700">25 Butir Pilihan Ganda</p>
+                    </div>
+                    <div class="bg-slate-50 p-4 rounded-xl border border-slate-200 shadow-sm">
+                        <i class="fa-solid fa-clock text-blue-600 text-xl mb-1"></i>
+                        <p class="text-xs text-slate-500">Durasi Ujian</p>
+                        <p id="display-duration" class="text-base font-bold text-slate-700">90 Menit</p>
+                    </div>
+                    <div class="bg-slate-50 p-4 rounded-xl border border-slate-200 shadow-sm">
+                        <i class="fa-solid fa-award text-blue-600 text-xl mb-1"></i>
+                        <p class="text-xs text-slate-500">Sistem Penilaian</p>
+                        <p class="text-base font-bold text-slate-700">Skor Max = 100</p>
+                    </div>
+                </div>
+
+                <!-- Petunjuk Pengerjaan -->
+                <div class="bg-blue-50 border-l-4 border-blue-600 p-4 rounded-r-xl">
+                    <h4 class="font-bold text-blue-900 text-sm mb-2 flex items-center">
+                        <i class="fa-solid fa-triangle-exclamation mr-2 text-blue-600"></i> Petunjuk Pengerjaan Ujian:
+                    </h4>
+                    <ul class="text-xs text-blue-900 space-y-1.5 list-disc list-inside">
+                        <li>Isi identitas diri Anda dengan lengkap dan benar pada halaman berikutnya.</li>
+                        <li>Pastikan koneksi perangkat stabil (ujian tersimpan secara lokal pada browser).</li>
+                        <li>Pilih salah satu jawaban yang paling tepat (A, B, C, D, atau E) pada setiap soal.</li>
+                        <li>Gunakan tombol <strong>Ragu-Ragu</strong> jika Anda ingin meninjau kembali soal tertentu.</li>
+                        <li>Waktu ujian berjalan mundur otomatis selama 90 menit; sistem akan otomatis mengumpulkan jawaban jika waktu habis.</li>
+                        <li>Periksa kembali seluruh jawaban sebelum menekan tombol Selesaikan Ujian.</li>
+                    </ul>
+                </div>
+
+                <!-- Tombol Mulai -->
+                <button onclick="goToIdentity()" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3.5 px-6 rounded-xl transition shadow-lg flex items-center justify-center space-x-2 text-base">
+                    <span>MULAI MENGISI IDENTITAS</span>
+                    <i class="fa-solid fa-arrow-right"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- 2. HALAMAN IDENTITAS PESERTA DIDIK -->
+        <div id="page-identity" class="w-full max-w-xl bg-white rounded-2xl shadow-xl overflow-hidden border border-slate-200 hidden">
+            <div class="bg-blue-900 p-6 text-white text-center">
+                <h2 class="text-xl font-bold">IDENTITAS PESERTA DIDIK</h2>
+                <p class="text-xs text-blue-200 mt-1">Silakan lengkapi data diri Anda sebelum memasuki soal ujian.</p>
+            </div>
+            <form id="form-identity" onsubmit="startExam(event)" class="p-6 sm:p-8 space-y-4">
+                <div>
+                    <label class="block text-xs font-semibold text-slate-700 uppercase mb-1">Nama Lengkap Peserta</label>
+                    <div class="relative">
+                        <span class="absolute inset-y-0 left-0 flex items-center pl-3 text-slate-400"><i class="fa-solid fa-user"></i></span>
+                        <input type="text" id="student-name" required placeholder="Contoh: Rian Hidayat" class="w-full pl-10 pr-4 py-2.5 bg-slate-50 border border-slate-300 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-600">
+                    </div>
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold text-slate-700 uppercase mb-1">Kelas</label>
+                    <div class="relative">
+                        <span class="absolute inset-y-0 left-0 flex items-center pl-3 text-slate-400"><i class="fa-solid fa-school"></i></span>
+                        <select id="student-class" required class="w-full pl-10 pr-4 py-2.5 bg-slate-50 border border-slate-300 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-600">
+                            <option value="">-- Pilih Kelas --</option>
+                            <option value="XI MIPA 1">XI MIPA 1</option>
+                            <option value="XI MIPA 2">XI MIPA 2</option>
+                            <option value="XI MIPA 3">XI MIPA 3</option>
+                            <option value="XI Fase F-1">XI Fase F-1</option>
+                            <option value="XI Fase F-2">XI Fase F-2</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-700 uppercase mb-1">Nomor Absen</label>
+                        <input type="number" id="student-absence" required min="1" max="50" placeholder="Contoh: 15" class="w-full px-4 py-2.5 bg-slate-50 border border-slate-300 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-600">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-700 uppercase mb-1">Nomor Peserta Ujian</label>
+                        <input type="text" id="student-number" required placeholder="Contoh: 046-11-015" class="w-full px-4 py-2.5 bg-slate-50 border border-slate-300 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-600">
+                    </div>
+                </div>
+                <div class="pt-4 flex space-x-3">
+                    <button type="button" onclick="backToHome()" class="w-1/3 bg-slate-200 hover:bg-slate-300 text-slate-700 font-semibold py-3 rounded-xl transition text-sm">Kembali</button>
+                    <button type="submit" class="w-2/3 bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 rounded-xl transition text-sm shadow-md">Lanjut ke Ujian</button>
+                </div>
+            </form>
+        </div>
+
+        <!-- 3. HALAMAN PENGERJAAN SOAL (UJIAN) -->
+        <div id="page-exam" class="w-full max-w-5xl bg-white rounded-2xl shadow-xl overflow-hidden border border-slate-200 hidden flex flex-col">
+            
+            <!-- Top Bar Ujian (Timer & Progress) -->
+            <div class="bg-slate-900 text-white px-6 py-4 flex flex-col sm:flex-row justify-between items-center border-b border-slate-800 gap-3">
+                <div class="flex items-center space-x-3">
+                    <div class="bg-slate-800 px-3 py-1.5 rounded-lg text-xs font-medium border border-slate-700">
+                        Peserta: <strong id="lbl-name" class="text-cyan-400">-</strong> (<span id="lbl-class">-</span>)
+                    </div>
+                    <div id="warning-timer" class="hidden bg-red-600 text-white px-3 py-1.5 rounded-lg text-xs font-bold animate-pulse">
+                        <i class="fa-solid fa-clock mr-1"></i> Waktu Hampir Habis!
+                    </div>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <div class="text-xs text-slate-300">Sisa Waktu:</div>
+                    <div id="timer-box" class="bg-red-900/60 border border-red-500/50 text-red-300 font-mono text-lg font-bold px-4 py-1 rounded-xl shadow-inner">
+                        00:00:00
+                    </div>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-4 flex-grow">
+                <!-- Area Soal Utama (3 Kolom) -->
+                <div class="lg:col-span-3 p-6 sm:p-8 flex flex-col justify-between border-r border-slate-200">
+                    <div>
+                        <!-- Info Meta Soal -->
+                        <div class="flex flex-wrap items-center justify-between gap-2 mb-4 text-xs font-semibold">
+                            <div class="flex items-center space-x-2">
+                                <span id="badge-number" class="bg-blue-600 text-white px-3 py-1 rounded-lg">Soal ke-1 dari 25</span>
+                                <span id="badge-topic" class="bg-slate-200 text-slate-700 px-3 py-1 rounded-lg">Struktur Atom</span>
+                            </div>
+                            <div class="flex items-center space-x-2">
+                                <span id="badge-difficulty" class="bg-emerald-100 text-emerald-800 px-2.5 py-1 rounded-md">Mudah (C1)</span>
+                                <span id="badge-cognitive" class="bg-indigo-100 text-indigo-800 px-2.5 py-1 rounded-md">C2</span>
+                            </div>
+                        </div>
+
+                        <!-- Stimulus / Konteks Soal -->
+                        <div id="stimulus-container" class="hidden mb-4 p-4 bg-amber-50/70 border-l-4 border-amber-500 rounded-r-xl text-xs sm:text-sm text-slate-700 leading-relaxed">
+                            <!-- Diisi via JS -->
+                        </div>
+
+                        <!-- Pertanyaan -->
+                        <h3 id="question-text" class="text-base sm:text-lg font-semibold text-slate-900 mb-6 chem-formula leading-relaxed">
+                            <!-- Pertanyaan dimuat disini -->
+                        </h3>
+
+                        <!-- Opsi Pilihan Ganda -->
+                        <div id="options-container" class="space-y-3 mb-6">
+                            <!-- Opsi A-E dimuat disini -->
+                        </div>
+                    </div>
+
+                    <!-- Navigasi Bawah Soal -->
+                    <div class="flex flex-col sm:flex-row justify-between items-center pt-4 border-t border-slate-200 gap-3">
+                        <div class="flex space-x-2 w-full sm:w-auto">
+                            <button onclick="prevQuestion()" id="btn-prev" class="flex-1 sm:flex-none px-4 py-2 bg-slate-200 hover:bg-slate-300 text-slate-700 font-semibold rounded-xl text-xs sm:text-sm transition flex items-center justify-center">
+                                <i class="fa-solid fa-arrow-left mr-2"></i> Sebelumnya
+                            </button>
+                            <button onclick="toggleFlag()" id="btn-flag" class="flex-1 sm:flex-none px-4 py-2 bg-amber-100 hover:bg-amber-200 text-amber-800 font-semibold rounded-xl text-xs sm:text-sm transition flex items-center justify-center">
+                                <i class="fa-solid fa-flag mr-2"></i> Ragu-Ragu
+                            </button>
+                        </div>
+                        <div class="flex space-x-2 w-full sm:w-auto">
+                            <button onclick="nextQuestion()" id="btn-next" class="flex-1 sm:flex-none px-5 py-2 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-xl text-xs sm:text-sm transition shadow-sm flex items-center justify-center">
+                                Berikutnya <i class="fa-solid fa-arrow-right ml-2"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Sidebar Navigasi Nomor Soal (1 Kolom) -->
+                <div class="bg-slate-50 p-4 sm:p-6 flex flex-col justify-between">
+                    <div>
+                        <div class="flex justify-between items-center mb-3">
+                            <h4 class="text-xs font-bold text-slate-700 uppercase tracking-wide">Navigasi Soal</h4>
+                            <span id="answered-counter" class="text-xs font-semibold text-blue-600">0 / 25 Terjawab</span>
+                        </div>
+                        
+                        <!-- Grid Nomor Soal -->
+                        <div id="question-grid" class="grid grid-cols-5 gap-2 mb-4">
+                            <!-- Dirender via JS -->
+                        </div>
+
+                        <!-- Keterangan Warna -->
+                        <div class="space-y-1.5 text-[11px] text-slate-600 bg-white p-3 rounded-xl border border-slate-200">
+                            <div class="flex items-center space-x-2">
+                                <div class="w-3 h-3 bg-blue-600 rounded"></div>
+                                <span>Posisi Aktif</span>
+                            </div>
+                            <div class="flex items-center space-x-2">
+                                <div class="w-3 h-3 bg-emerald-500 rounded"></div>
+                                <span>Sudah Dijawab</span>
+                            </div>
+                            <div class="flex items-center space-x-2">
+                                <div class="w-3 h-3 bg-amber-400 rounded"></div>
+                                <span>Ragu-Ragu</span>
+                            </div>
+                            <div class="flex items-center space-x-2">
+                                <div class="w-3 h-3 bg-slate-200 rounded"></div>
+                                <span>Belum Dijawab</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Tombol Akhiri Ujian -->
+                    <div class="mt-6 pt-4 border-t border-slate-200">
+                        <button onclick="confirmFinishExam()" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-2.5 px-4 rounded-xl text-xs sm:text-sm transition shadow-md flex items-center justify-center space-x-2">
+                            <i class="fa-solid fa-paper-plane"></i>
+                            <span>SELESAIKAN UJIAN</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 4. HALAMAN KONFIRMASI SELESAI -->
+        <div id="page-confirm" class="w-full max-w-md bg-white rounded-2xl shadow-xl overflow-hidden border border-slate-200 hidden p-6 sm:p-8 text-center space-y-6">
+            <div class="w-16 h-16 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center mx-auto text-2xl">
+                <i class="fa-solid fa-circle-question"></i>
+            </div>
+            <div>
+                <h3 class="text-xl font-bold text-slate-900 mb-2">Konfirmasi Pengumpulan Ujian</h3>
+                <p class="text-xs sm:text-sm text-slate-600">Pastikan seluruh soal telah Anda kerjakan dengan teliti sebelum mengakhiri sesi asesmen.</p>
+            </div>
+            
+            <div class="bg-slate-50 p-4 rounded-xl border border-slate-200 text-left space-y-2 text-xs">
+                <div class="flex justify-between">
+                    <span class="text-slate-500">Soal Terjawab:</span>
+                    <strong id="summary-answered" class="text-emerald-600">0 soal</strong>
+                </div>
+                <div class="flex justify-between">
+                    <span class="text-slate-500">Belum Dijawab / Kosong:</span>
+                    <strong id="summary-unanswered" class="text-red-600">0 soal</strong>
+                </div>
+                <div class="flex justify-between">
+                    <span class="text-slate-500">Ditandai Ragu-Ragu:</span>
+                    <strong id="summary-flagged" class="text-amber-600">0 soal</strong>
+                </div>
+            </div>
+
+            <div class="flex space-x-3">
+                <button onclick="returnToExam()" class="w-1/2 bg-slate-200 hover:bg-slate-300 text-slate-700 font-semibold py-2.5 rounded-xl text-xs sm:text-sm transition">Kembali Ujian</button>
+                <button onclick="submitExamFinal()" class="w-1/2 bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-2.5 rounded-xl text-xs sm:text-sm transition shadow-md">Ya, Selesaikan</button>
+            </div>
+        </div>
+
+        <!-- 5. HALAMAN HASIL UJIAN -->
+        <div id="page-result" class="w-full max-w-3xl bg-white rounded-2xl shadow-xl overflow-hidden border border-slate-200 hidden">
+            <div class="bg-gradient-to-r from-emerald-800 to-teal-900 p-6 sm:p-8 text-white text-center">
+                <div class="w-14 h-14 bg-white/10 rounded-full flex items-center justify-center mx-auto mb-3 backdrop-blur-sm text-2xl text-emerald-300">
+                    <i class="fa-solid fa-award"></i>
+                </div>
+                <h2 class="text-2xl font-bold">HASIL ASESMEN SUMATIF AKHIR TAHUN</h2>
+                <p class="text-xs text-emerald-200 mt-1">SMA Negeri 46 Maluku Tengah - Mata Pelajaran Kimia</p>
+            </div>
+
+            <div class="p-6 sm:p-8 space-y-6">
+                <!-- Identitas & Nilai Utama -->
+                <div class="bg-slate-50 p-6 rounded-2xl border border-slate-200 grid grid-cols-1 sm:grid-cols-2 gap-6 items-center">
+                    <div class="space-y-2 text-xs sm:text-sm">
+                        <p class="text-slate-500">Nama Peserta: <strong id="res-name" class="text-slate-800 font-semibold"></strong></p>
+                        <p class="text-slate-500">Kelas / Absen: <strong id="res-class" class="text-slate-800 font-semibold"></strong> (<span id="res-absence"></span>)</p>
+                        <p class="text-slate-500">Nomor Peserta: <strong id="res-number" class="text-slate-800 font-semibold"></strong></p>
+                    </div>
+                    <div class="bg-white p-4 rounded-xl border border-slate-200 text-center shadow-sm">
+                        <p class="text-xs text-slate-500 font-medium uppercase tracking-wider">Nilai Akhir Asesmen</p>
+                        <p id="res-score" class="text-4xl font-extrabold text-blue-600 my-1">0</p>
+                        <span id="res-status" class="inline-block px-3 py-0.5 rounded-full text-xs font-semibold bg-emerald-100 text-emerald-800">Lulus</span>
+                    </div>
+                </div>
+
+                <!-- Statistik Jawaban -->
+                <div class="grid grid-cols-3 gap-4 text-center">
+                    <div class="bg-emerald-50 p-4 rounded-xl border border-emerald-200">
+                        <p class="text-xs text-emerald-700 font-medium">Jawaban Benar</p>
+                        <p id="res-correct" class="text-2xl font-bold text-emerald-800 mt-1">0</p>
+                    </div>
+                    <div class="bg-red-50 p-4 rounded-xl border border-red-200">
+                        <p class="text-xs text-red-700 font-medium">Jawaban Salah</p>
+                        <p id="res-wrong" class="text-2xl font-bold text-red-800 mt-1">0</p>
+                    </div>
+                    <div class="bg-slate-100 p-4 rounded-xl border border-slate-200">
+                        <p class="text-xs text-slate-600 font-medium">Tidak Dijawab</p>
+                        <p id="res-unanswered" class="text-2xl font-bold text-slate-700 mt-1">0</p>
+                    </div>
+                </div>
+
+                <!-- Keterangan & Tindakan -->
+                <div class="bg-blue-50 border-l-4 border-blue-600 p-4 rounded-r-xl text-xs text-blue-900 leading-relaxed">
+                    <p class="font-bold mb-1">Catatan Hasil Asesmen:</p>
+                    <p>Hasil asesmen ini telah terekam secara lokal pada perangkat Anda. Nilai dihitung berdasarkan bobot skor 4 untuk setiap jawaban benar (Total Skor Max = 100). Silakan cetak halaman hasil ini atau unduh rekap nilai oleh guru pengampu.</p>
+                </div>
+
+                <div class="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-3 pt-2">
+                    <button onclick="window.print()" class="flex-1 bg-slate-800 hover:bg-slate-900 text-white font-semibold py-3 rounded-xl text-xs sm:text-sm transition flex items-center justify-center space-x-2">
+                        <i class="fa-solid fa-print"></i>
+                        <span>Cetak Hasil Ujian</span>
+                    </button>
+                    <button onclick="restartApp()" class="flex-1 bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 rounded-xl text-xs sm:text-sm transition flex items-center justify-center space-x-2">
+                        <i class="fa-solid fa-rotate-right"></i>
+                        <span>Selesai / Keluar</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- Modal Panel Guru / Pengelola -->
+    <div id="teacher-modal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-white w-full max-w-3xl rounded-2xl shadow-2xl overflow-hidden border border-slate-200 flex flex-col max-h-[90vh]">
+            <div class="bg-blue-900 text-white px-6 py-4 flex justify-between items-center">
+                <div class="flex items-center space-x-2">
+                    <i class="fa-solid fa-user-shield text-cyan-400"></i>
+                    <h3 class="font-bold text-base">Panel Pengelolaan Guru (Sarkia Silawane, S.Pd.)</h3>
+                </div>
+                <button onclick="closeTeacherModal()" class="text-white hover:text-red-300 text-lg">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+            
+            <div class="p-6 overflow-y-auto space-y-6">
+                <!-- Pengaturan Durasi -->
+                <div class="bg-slate-50 p-4 rounded-xl border border-slate-200">
+                    <h4 class="font-bold text-xs text-slate-700 uppercase mb-2">Pengaturan Waktu Ujian</h4>
+                    <div class="flex items-center space-x-3">
+                        <input type="number" id="setting-duration" value="90" min="10" max="180" class="w-24 px-3 py-2 bg-white border border-slate-300 rounded-lg text-sm">
+                        <span class="text-xs text-slate-600">Menit (Default: 90 menit)</span>
+                        <button onclick="updateDurationSetting()" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg text-xs font-semibold transition">Simpan Durasi</button>
+                    </div>
+                </div>
+
+                <!-- Tabel Rekap Nilai Peserta -->
+                <div>
+                    <div class="flex justify-between items-center mb-3">
+                        <h4 class="font-bold text-xs text-slate-700 uppercase">Rekapitulasi Hasil Ujian Peserta</h4>
+                        <button onclick="exportCSV()" class="bg-emerald-600 hover:bg-emerald-700 text-white px-3 py-1.5 rounded-lg text-xs font-semibold transition flex items-center">
+                            <i class="fa-solid fa-file-excel mr-1.5"></i> Unduh Rekap CSV
+                        </button>
+                    </div>
+                    <div class="overflow-x-auto border border-slate-200 rounded-xl">
+                        <table class="w-full text-left border-collapse text-xs">
+                            <thead>
+                                <tr class="bg-slate-100 text-slate-700 border-b border-slate-200">
+                                    <th class="p-3">No</th>
+                                    <th class="p-3">Nama Peserta</th>
+                                    <th class="p-3">Kelas</th>
+                                    <th class="p-3">Absen</th>
+                                    <th class="p-3 text-center">Benar</th>
+                                    <th class="p-3 text-center">Salah</th>
+                                    <th class="p-3 text-center">Nilai</th>
+                                </tr>
+                            </thead>
+                            <tbody id="recap-table-body">
+                                <!-- Data rekap dimuat via JS -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-slate-50 px-6 py-3 border-t border-slate-200 flex justify-end">
+                <button onclick="closeTeacherModal()" class="bg-slate-200 hover:bg-slate-300 text-slate-700 px-4 py-2 rounded-xl text-xs font-semibold transition">Tutup Panel</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer Sekolah -->
+    <footer class="bg-slate-900 text-slate-400 text-center py-4 text-xs border-t border-slate-800 no-print">
+        <p>Asesmen Sumatif Akhir Tahun (ASAT) Kimia &bull; SMA Negeri 46 Maluku Tengah &bull; Guru Mata Pelajaran: Sarkia Silawane, S.Pd.</p>
+    </footer>
+
+    <!-- JavaScript Logika & Bank Soal -->
+    <script>
+        // Data Bank Soal Lengkap 25 Butir Kimia Fase F Kelas XI
+        const questionsData = [
+            // --- 1. STRUKTUR ATOM (5 Soal) ---
+            {
+                id: 1,
+                materi: "Struktur Atom",
+                tingkat: "Mudah",
+                kognitif: "C1",
+                indikator: "Menentukan jumlah proton, elektron, dan neutron dari suatu unsur atau ion.",
+                stimulus: null,
+                pertanyaan: "Suatu atom unsur X memiliki nomor atom 19 dan nomor massa 39. Jumlah proton, elektron, dan neutron dalam ion X<sup>+</sup> berturut-turut adalah...",
+                options: [
+                    "19, 18, dan 20",
+                    "19, 19, dan 20",
+                    "20, 19, dan 19",
+                    "18, 19, dan 20",
+                    "19, 20, dan 18"
+                ],
+                answer: 0
+            },
+            {
+                id: 2,
+                materi: "Struktur Atom",
+                tingkat: "Sedang",
+                kognitif: "C3",
+                indikator: "Menentukan konfigurasi elektron dan keempat bilangan kuantum elektron terakhir.",
+                stimulus: null,
+                pertanyaan: "Konfigurasi elektron unsur <span class='chem-formula'>_{24}Cr</span> adalah...",
+                options: [
+                    "[Ar] 4s<sup>2</sup> 3d<sup>4</sup>",
+                    "[Ar] 4s<sup>1</sup> 3d<sup>5</sup>",
+                    "[Ar] 4s<sup>2</sup> 3d<sup>3</sup> 4p<sup>1</sup>",
+                    "[Kr] 5s<sup>1</sup> 4d<sup>5</sup>",
+                    "[Ne] 3s<sup>2</sup> 3p<sup>6</sup> 4s<sup>2</sup> 3d<sup>4</sup>"
+                ],
+                answer: 1
+            },
+            {
+                id: 3,
+                materi: "Struktur Atom",
+                tingkat: "HOTS",
+                kognitif: "C4",
+                indikator: "Menganalisis bilangan kuantum dari elektron terakhir suatu unsur berdasarkan data nomor atom.",
+                stimulus: "Perhatikan unsur Y dengan nomor atom 35. Unsur ini berada pada golongan halogen dan periode ke-4 dalam tabel periodik.",
+                pertanyaan: "Nilai keempat bilangan kuantum (n, l, m, s) untuk elektron terakhir dari atom unsur <span class='chem-formula'>_{35}Y</span> adalah...",
+                options: [
+                    "n = 4, l = 1, m = 0, s = -1/2",
+                    "n = 4, l = 1, m = +1, s = -1/2",
+                    "n = 4, l = 0, m = 0, s = +1/2",
+                    "n = 3, l = 2, m = +2, s = -1/2",
+                    "n = 4, l = 1, m = -1, s = +1/2"
+                ],
+                answer: 1
+            },
+            {
+                id: 4,
+                materi: "Struktur Atom",
+                tingkat: "Sedang",
+                kognitif: "C3",
+                indikator: "Menentukan letak unsur (golongan dan periode) dalam tabel periodik berdasarkan konfigurasi elektron.",
+                stimulus: null,
+                pertanyaan: "Suatu unsur dengan nomor atom 26 terletak pada golongan dan periode...",
+                options: [
+                    "Golongan IIA, Periode 4",
+                    "Golongan VIIIB, Periode 4",
+                    "Golongan VIIB, Periode 4",
+                    "Golongan VIB, Periode 3",
+                    "Golongan VIIIB, Periode 3"
+                ],
+                answer: 1
+            },
+            {
+                id: 5,
+                materi: "Struktur Atom",
+                tingkat: "Mudah",
+                kognitif: "C2",
+                indikator: "Membedakan pengertian isotop, isobar, dan isoton.",
+                stimulus: null,
+                pertanyaan: "Pasangan atom berikut yang merupakan isotop adalah...",
+                options: [
+                    "^{14}_{6}C dan ^{14}_{7}N",
+                    "^{24}_{12}Mg dan ^{24}_{11}Na",
+                    "^{35}_{17}Cl dan ^{37}_{17}Cl",
+                    "^{32}_{16}S dan ^{31}_{15}P",
+                    "^{39}_{19}K dan ^{40}_{20}Ca"
+                ],
+                answer: 2
+            },
+
+            // --- 2. SISTEM PERIODIK UNSUR (5 Soal) ---
+            {
+                id: 6,
+                materi: "Sistem Periodik Unsur",
+                tingkat: "Mudah",
+                kognitif: "C1",
+                indikator: "Menjelaskan dasar penyusunan sistem periodik modern oleh Henry Moseley.",
+                stimulus: null,
+                pertanyaan: "Dasar utama penyusunan Sistem Periodik Modern (panjang) yang dikemukakan oleh Henry Moseley adalah...",
+                options: [
+                    "Kenaikan massa atom",
+                    "Kenaikan nomor atom",
+                    "Kenaikan titik cair dan titik didih",
+                    "Kemiripan sifat kimia dan fisika",
+                    "Jumlah elektron valensi"
+                ],
+                answer: 1
+            },
+            {
+                id: 7,
+                materi: "Sistem Periodik Unsur",
+                tingkat: "Sedang",
+                kognitif: "C3",
+                indikator: "Membandingkan jari-jari atom dalam satu golongan atau periode.",
+                stimulus: null,
+                pertanyaan: "Di antara unsur-unsur <span class='chem-formula'>_9F</span>, <span class='chem-formula'>_{17}Cl</span>, <span class='chem-formula'>_{35}Br</span>, dan <span class='chem-formula'>_{53}I</span>, unsur yang memiliki jari-jari atom terbesar adalah...",
+                options: [
+                    "F",
+                    "Cl",
+                    "Br",
+                    "I",
+                    "Semua sama besar"
+                ],
+                answer: 3
+            },
+            {
+                id: 8,
+                materi: "Sistem Periodik Unsur",
+                tingkat: "HOTS",
+                kognitif: "C4",
+                indikator: "Menganalisis tren keperiodikan unsur terkait energi ionisasi dan afinitas elektron.",
+                stimulus: "Perhatikan data energi ionisasi pertama (EI₁) beberapa unsur seperiode: P = 496 kJ/mol, Q = 738 kJ/mol, R = 1000 kJ/mol, S = 1256 kJ/mol.",
+                pertanyaan: "Berdasarkan data tersebut, unsur yang paling mudah melepaskan elektron membentuk ion positif adalah...",
+                options: [
+                    "P",
+                    "Q",
+                    "R",
+                    "S",
+                    "Tidak dapat ditentukan"
+                ],
+                answer: 0
+            },
+            {
+                id: 9,
+                materi: "Sistem Periodik Unsur",
+                tingkat: "Sedang",
+                kognitif: "C3",
+                indikator: "Menentukan sifat keperiodikan keelektronegatifan dalam sistem periodik.",
+                stimulus: null,
+                pertanyaan: "Unsur yang memiliki keelektronegatifan terbesar dalam tabel periodik unsur adalah...",
+                options: [
+                    "Natrium (Na)",
+                    "Klorin (Cl)",
+                    "Fluorin (F)",
+                    "Oksigen (O)",
+                    "Iodin (I)"
+                ],
+                answer: 2
+            },
+            {
+                id: 10,
+                materi: "Sistem Periodik Unsur",
+                tingkat: "Mudah",
+                kognitif: "C2",
+                indikator: "Mengidentifikasi sifat logam dan nonlogam dalam satu periode.",
+                stimulus: null,
+                pertanyaan: "Dalam satu periode dari kiri ke kanan, sifat logam suatu unsur akan semakin...",
+                options: [
+                    "Bertambah",
+                    "Berkurang",
+                    "Tetap",
+                    "Berkurang lalu bertambah",
+                    "Tidak teratur"
+                ],
+                answer: 1
+            },
+
+            // --- 3. IKATAN KIMIA (5 Soal) ---
+            {
+                id: 11,
+                materi: "Ikatan Kimia",
+                tingkat: "Mudah",
+                kognitif: "C2",
+                indikator: "Menentukan jenis ikatan kimia (ion atau kovalen) dari suatu senyawa.",
+                stimulus: null,
+                pertanyaan: "Senyawa di bawah ini yang ikatan antaratomnya bersifat kovalen polar adalah...",
+                options: [
+                    "<span class='chem-formula'>NaCl</span>",
+                    "<span class='chem-formula'>CH_4</span>",
+                    "<span class='chem-formula'>HCl</span>",
+                    "<span class='chem-formula'>CO_2</span>",
+                    "<span class='chem-formula'>Cl_2</span>"
+                ],
+                answer: 2
+            },
+            {
+                id: 12,
+                materi: "Ikatan Kimia",
+                tingkat: "Sedang",
+                kognitif: "C3",
+                indikator: "Menentukan rumus kimia senyawa ion yang terbentuk dari dua unsur.",
+                stimulus: null,
+                pertanyaan: "Unsur A (nomor atom 12) berikatan dengan unsur B (nomor atom 17). Rumus kimia dan jenis ikatan senyawa yang terbentuk adalah...",
+                options: [
+                    "<span class='chem-formula'>AB_2</span>, ikatan kovalen",
+                    "<span class='chem-formula'>AB_2</span>, ikatan ion",
+                    "<span class='chem-formula'>A_2B</span>, ikatan ion",
+                    "<span class='chem-formula'>AB</span>, ikatan kovalen",
+                    "<span class='chem-formula'>AB_3</span>, ikatan ion"
+                ],
+                answer: 1
+            },
+            {
+                id: 13,
+                materi: "Ikatan Kimia",
+                tingkat: "HOTS",
+                kognitif: "C5",
+                indikator: "Menganalisis bentuk molekul berdasarkan teori domain elektron (VSEPR).",
+                stimulus: "Molekul <span class='chem-formula'>NH_3</span> (Nomor atom N = 7, H = 1) memiliki pasangan elektron ikatan (PEI) sebanyak 3 dan pasangan elektron bebas (PEB) sebanyak 1 pada atom pusat N.",
+                pertanyaan: "Berdasarkan teori domain elektron, bentuk geometri molekul <span class='chem-formula'>NH_3</span> adalah...",
+                options: [
+                    "Linier",
+                    "Segitiga planar",
+                    "Tetrahedral",
+                    "Piramida trigonal",
+                    "Bentuk V (Letter V)"
+                ],
+                answer: 3
+            },
+            {
+                id: 14,
+                materi: "Ikatan Kimia",
+                tingkat: "Sedang",
+                kognitif: "C3",
+                indikator: "Menentukan jumlah ikatan kovalen koordinasi dalam suatu molekul.",
+                stimulus: null,
+                pertanyaan: "Pada molekul asam sulfat (<span class='chem-formula'>H_2SO_4</span>, nomor atom H=1, S=16, O=8), jumlah ikatan kovalen koordinasi yang ada adalah...",
+                options: [
+                    "0",
+                    "1",
+                    "2",
+                    "3",
+                    "4"
+                ],
+                answer: 2
+            },
+            {
+                id: 15,
+                materi: "Ikatan Kimia",
+                tingkat: "Mudah",
+                kognitif: "C1",
+                indikator: "Menyebutkan sifat fisis senyawa ion dibandingkan senyawa kovalen.",
+                stimulus: null,
+                pertanyaan: "Senyawa ion pada umumnya memiliki titik leleh dan titik didih yang tinggi. Hal ini disebabkan oleh...",
+                options: [
+                    "Ikatan antar molekulnya sangat lemah",
+                    "Gaya tarik elektrostatik antar ion positif dan negatif sangat kuat",
+                    "Senyawa ion berwujud gas pada suhu kamar",
+                    "Elektron pada senyawa ion terdelokalisasi bebas",
+                    "Molekulnya bersifat nonpolar"
+                ],
+                answer: 1
+            },
+
+            // --- 4. HIDROKARBON (5 Soal) ---
+            {
+                id: 16,
+                materi: "Hidrokarbon",
+                tingkat: "Mudah",
+                kognitif: "C1",
+                indikator: "Mengelompokkan senyawa hidrokarbon jenuh dan tak jenuh.",
+                stimulus: null,
+                pertanyaan: "Kelompok senyawa hidrokarbon yang termasuk alkana (jenuh) adalah...",
+                options: [
+                    "<span class='chem-formula'>C_2H_4, C_3H_6, C_4H_8</span>",
+                    "<span class='chem-formula'>C_2H_2, C_3H_4, C_4H_6</span>",
+                    "<span class='chem-formula'>CH_4, C_2H_6, C_3H_8</span>",
+                    "<span class='chem-formula'>C_2H_6, C_3H_6, C_4H_10</span>",
+                    "<span class='chem-formula'>CH_4, C_2H_4, C_3H_4</span>"
+                ],
+                answer: 2
+            },
+            {
+                id: 17,
+                materi: "Hidrokarbon",
+                tingkat: "Sedang",
+                kognitif: "C3",
+                indikator: "Memberikan nama IUPAC suatu struktur alkana bercabang.",
+                stimulus: null,
+                pertanyaan: "Nama IUPAC untuk senyawa alkana dengan rumus struktur <span class='chem-formula'>CH_3-CH(CH_3)-CH_2-CH(CH_3)-CH_3</span> adalah...",
+                options: [
+                    "2,4-dimetilpentana",
+                    "2,3-dimetilpentana",
+                    "2-metilheksana",
+                    "1,3-dimetilbutana",
+                    "3,4-dimetilpentana"
+                ],
+                answer: 0
+            },
+            {
+                id: 18,
+                materi: "Hidrokarbon",
+                tingkat: "HOTS",
+                kognitif: "C4",
+                indikator: "Menentukan jumlah isomer struktur dari suatu rumus molekul alkana/alkena.",
+                stimulus: "Senyawa dengan rumus molekul <span class='chem-formula'>C_5H_{12</span>} merupakan alkana rantai karbon jenuh.",
+                pertanyaan: "Jumlah isomer struktur (termasuk isomer rantai) yang dimiliki oleh senyawa <span class='chem-formula'>C_5H_{12</span>} adalah...",
+                options: [
+                    "2",
+                    "3",
+                    "4",
+                    "5",
+                    "6"
+                ],
+                answer: 1
+            },
+            {
+                id: 19,
+                materi: "Hidrokarbon",
+                tingkat: "Sedang",
+                kognitif: "C3",
+                indikator: "Menentukan jenis reaksi kimia pada hidrokarbon (adisi, substitusi, eliminasi).",
+                stimulus: null,
+                pertanyaan: "Reaksi antara etena (<span class='chem-formula'>C_2H_4</span>) dengan gas hidrogen (<span class='chem-formula'>H_2</span>) menghasilkan etana (<span class='chem-formula'>C_2H_6</span>) termasuk jenis reaksi...",
+                options: [
+                    "Substitusi",
+                    "Adisi",
+                    "Eliminasi",
+                    "Oksidasi",
+                    "Polimerisasi"
+                ],
+                answer: 1
+            },
+            {
+                id: 20,
+                materi: "Hidrokarbon",
+                tingkat: "Mudah",
+                kognitif: "C2",
+                indikator: "Menjelaskan hasil pembakaran sempurna senyawa hidrokarbon.",
+                stimulus: null,
+                pertanyaan: "Pembakaran sempurna senyawa hidrokarbon akan menghasilkan zat sisa berupa...",
+                options: [
+                    "<span class='chem-formula'>CO</span> dan <span class='chem-formula'>H_2O</span>",
+                    "<span class='chem-formula'>CO_2</span> dan <span class='chem-formula'>H_2</span>",
+                    "<span class='chem-formula'>CO_2</span> dan <span class='chem-formula'>H_2O</span>",
+                    "<span class='chem-formula'>C</span> dan <span class='chem-formula'>H_2O</span>",
+                    "<span class='chem-formula'>CO</span> dan <span class='chem-formula'>H_2</span>"
+                ],
+                answer: 2
+            },
+
+            // --- 5. TERMOKIMIA (5 Soal) ---
+            {
+                id: 21,
+                materi: "Termokimia",
+                tingkat: "Mudah",
+                kognitif: "C1",
+                indikator: "Membedakan sistem dan lingkungan serta reaksi eksoterm dan endoterm.",
+                stimulus: null,
+                pertanyaan: "Ciri dari suatu reaksi kimia yang berlangsung secara endoterm adalah...",
+                options: [
+                    "Sistem melepaskan kalor ke lingkungan",
+                    "Terjadi kenaikan suhu lingkungan",
+                    "Perubahan entalpi (<span class='chem-formula'>\\Delta H</span>) bernilai positif",
+                    "Kalor pembentukan bernilai negatif",
+                    "Suhu sistem selalu lebih tinggi dari lingkungan"
+                ],
+                answer: 2
+            },
+            {
+                id: 22,
+                materi: "Termokimia",
+                tingkat: "Sedang",
+                kognitif: "C3",
+                indikator: "Menuliskan persamaan termokimia pembentukan standar (<span class='chem-formula'>\\Delta H_f^\\circ</span>).",
+                stimulus: null,
+                pertanyaan: "Diketahui entalpi pembentukan standar (<span class='chem-formula'>\\Delta H_f^\\circ</span>) gas <span class='chem-formula'>CO_2</span> adalah -393,5 kJ/mol. Persamaan termokimia yang tepat adalah...",
+                options: [
+                    "<span class='chem-formula'>C(s) + O_2(g) \\rightarrow CO_2(g) \\quad \\Delta H = -393,5 \\text{ kJ}</span>",
+                    "<span class='chem-formula'>2C(s) + O_2(g) \\rightarrow 2CO_2(g) \\quad \\Delta H = -393,5 \\text{ kJ}</span>",
+                    "<span class='chem-formula'>CO(g) + \\frac{1}{2}O_2(g) \\rightarrow CO_2(g) \\quad \\Delta H = -393,5 \\text{ kJ}</span>",
+                    "<span class='chem-formula'>CO_2(g) \\rightarrow C(s) + O_2(g) \\quad \\Delta H = +393,5 \\text{ kJ}</span>",
+                    "<span class='chem-formula'>C(s) + \\frac{1}{2}O_2(g) \\rightarrow CO(g) \\quad \\Delta H = -393,5 \\text{ kJ}</span>"
+                ],
+                answer: 0
+            },
+            {
+                id: 23,
+                materi: "Termokimia",
+                tingkat: "Sedang",
+                kognitif: "C3",
+                indikator: "Menghitung perubahan entalpi reaksi berdasarkan hukum Hess.",
+                stimulus: "Diketahui reaksi:\n1) <span class='chem-formula'>A + B \\rightarrow C \\quad \\Delta H = -100 \\text{ kJ}</span>\n2) <span class='chem-formula'>B + D \\rightarrow E \\quad \\Delta H = +50 \\text{ kJ}</span>",
+                pertanyaan: "Maka perubahan entalpi untuk reaksi <span class='chem-formula'>A + D \\rightarrow C - B</span> (atau penyesuaian hukum Hess) adalah...",
+                options: [
+                    "-150 kJ",
+                    "-50 kJ",
+                    "+50 kJ",
+                    "+150 kJ",
+                    "-200 kJ"
+                ],
+                answer: 1
+            },
+            {
+                id: 24,
+                materi: "Termokimia",
+                tingkat: "HOTS",
+                kognitif: "C4",
+                indikator: "Menghitung <span class='chem-formula'>\\Delta H</span> reaksi berdasarkan data energi ikatan rata-rata.",
+                stimulus: "Diketahui energi ikatan rata-rata:\nC-H = 413 kJ/mol\nCl-Cl = 242 kJ/mol\nC-Cl = 328 kJ/mol\nH-Cl = 431 kJ/mol\nReaksi: <span class='chem-formula'>CH_4(g) + Cl_2(g) \\rightarrow CH_3Cl(g) + HCl(g)</span>",
+                pertanyaan: "Berdasarkan data energi ikatan tersebut, perubahan entalpi (<span class='chem-formula'>\\Delta H</span>) untuk reaksi pembentukan metil klorida adalah...",
+                options: [
+                    "-104 kJ/mol",
+                    "+104 kJ/mol",
+                    "-52 kJ/mol",
+                    "+52 kJ/mol",
+                    "-208 kJ/mol"
+                ],
+                answer: 0
+            },
+            {
+                id: 25,
+                materi: "Termokimia",
+                tingkat: "HOTS",
+                kognitif: "C4",
+                indikator: "Menghitung perubahan entalpi (<span class='chem-formula'>\\Delta H</span>) dari data kalorimeter sederhana.",
+                stimulus: "Sebanyak 50 mL larutan <span class='chem-formula'>NaOH</span> 1 M direaksikan dengan 50 mL larutan <span class='chem-formula'>HCl</span> 1 M dalam kalorimeter. Suhu awal larutan naik dari 28°C menjadi 35°C. Jika kalor jenis air = 4,2 J/g°C dan massa jenis larutan dianggap 1 g/mL.",
+                pertanyaan: "Besarnya perubahan entalpi netralisasi (<span class='chem-formula'>\\Delta H</span>) per mol <span class='chem-formula'>H_2O</span> yang terbentuk adalah...",
+                options: [
+                    "-29,4 kJ/mol",
+                    "-58,8 kJ/mol",
+                    "-117,6 kJ/mol",
+                    "+58,8 kJ/mol",
+                    "+29,4 kJ/mol"
+                ],
+                answer: 1
+            }
+        ];
+
+        // State Aplikasi
+        let currentQuestionIndex = 0;
+        let studentAnswers = new Array(questionsData.length).fill(null);
+        let flaggedQuestions = new Array(questionsData.length).fill(false);
+        let examDurationSeconds = 90 * 60; // 90 menit default
+        let remainingSeconds = examDurationSeconds;
+        let timerInterval = null;
+        let studentData = { name: "", class: "", absence: "", number: "" };
+        let examSubmitted = false;
+
+        // Inisialisasi Aplikasi pada saat load
+        window.onload = function() {
+            // Muat rekap jika ada di localStorage
+            loadRecapFromStorage();
+        };
+
+        // Navigasi Antar Halaman
+        function goToIdentity() {
+            document.getElementById('page-home').classList.add('hidden');
+            document.getElementById('page-identity').classList.remove('hidden');
+        }
+
+        function backToHome() {
+            document.getElementById('page-identity').classList.add('hidden');
+            document.getElementById('page-home').classList.remove('hidden');
+        }
+
+        function startExam(e) {
+            e.preventDefault();
+            studentData.name = document.getElementById('student-name').value.trim();
+            studentData.class = document.getElementById('student-class').value;
+            studentData.absence = document.getElementById('student-absence').value.trim();
+            studentData.number = document.getElementById('student-number').value.trim();
+
+            if (!studentData.name || !studentData.class || !studentData.absence || !studentData.number) {
+                alert("Mohon lengkapi seluruh formulir identitas peserta!");
+                return;
+            }
+
+            document.getElementById('lbl-name').innerText = studentData.name;
+            document.getElementById('lbl-class').innerText = studentData.class;
+
+            document.getElementById('page-identity').classList.add('hidden');
+            document.getElementById('page-exam').classList.remove('hidden');
+
+            // Mulai Timer
+            startTimer();
+            renderQuestionGrid();
+            loadQuestion(0);
+        }
+
+        // Timer Ujian
+        function startTimer() {
+            timerInterval = setInterval(() => {
+                if (remainingSeconds <= 0) {
+                    clearInterval(timerInterval);
+                    alert("Waktu ujian telah habis! Sistem akan otomatis mengumpulkan jawaban Anda.");
+                    submitExamFinal();
+                    return;
+                }
+
+                remainingSeconds--;
+                updateTimerDisplay();
+
+                // Peringatan 10 menit terakhir (600 detik)
+                if (remainingSeconds === 600) {
+                    document.getElementById('warning-timer').classList.remove('hidden');
+                }
+            }, 1000);
+        }
+
+        function updateTimerDisplay() {
+            const hours = Math.floor(remainingSeconds / 3600);
+            const minutes = Math.floor((remainingSeconds % 3600) / 60);
+            const seconds = remainingSeconds % 60;
+
+            const timeStr = `${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+            document.getElementById('timer-box').innerText = timeStr;
+        }
+
+        // Render Soal dan Opsi
+        function loadQuestion(index) {
+            currentQuestionIndex = index;
+            const q = questionsData[index];
+
+            // Update Header Soal
+            document.getElementById('badge-number').innerText = `Soal ke-${index + 1} dari ${questionsData.length}`;
+            document.getElementById('badge-topic').innerText = q.materi;
+            document.getElementById('badge-difficulty').innerText = `${q.tingkat} (${q.kognitif})`;
+            document.getElementById('badge-cognitive').innerText = `Level ${q.kognitif}`;
+
+            // Stimulus jika ada
+            const stimulusBox = document.getElementById('stimulus-container');
+            if (q.stimulus) {
+                stimulusBox.innerHTML = `<strong><i class="fa-solid fa-circle-info mr-1"></i> Stimulus / Data Soal:</strong><br>${q.stimulus.replace(/\n/g, '<br>')}`;
+                stimulusBox.classList.remove('hidden');
+            } else {
+                stimulusBox.classList.add('hidden');
+            }
+
+            // Pertanyaan
+            document.getElementById('question-text').innerHTML = q.pertanyaan.replace(/\n/g, '<br>');
+
+            // Render Opsi Jawaban A, B, C, D, E
+            const optionsContainer = document.getElementById('options-container');
+            optionsContainer.innerHTML = "";
+
+            const optionLetters = ['A', 'B', 'C', 'D', 'E'];
+            q.options.forEach((optText, optIdx) => {
+                const isSelected = studentAnswers[index] === optIdx;
+                const borderClass = isSelected ? 'border-blue-600 bg-blue-50/70 ring-2 ring-blue-600' : 'border-slate-200 bg-white hover:bg-slate-50';
+                
+                const div = document.createElement('div');
+                div.className = `flex items-center p-3.5 rounded-xl border cursor-pointer transition ${borderClass}`;
+                div.onclick = () => selectOption(optIdx);
+
+                div.innerHTML = `
+                    <div class="w-8 h-8 rounded-lg flex items-center justify-center font-bold text-xs mr-3 ${isSelected ? 'bg-blue-600 text-white' : 'bg-slate-100 text-slate-700'}">
+                        ${optionLetters[optIdx]}
+                    </div>
+                    <div class="text-xs sm:text-sm text-slate-800 chem-formula flex-grow">
+                        ${optText}
+                    </div>
+                `;
+                optionsContainer.appendChild(div);
+            });
+
+            // Tombol Navigasi Sebelumnya / Berikutnya
+            document.getElementById('btn-prev').disabled = index === 0;
+            document.getElementById('btn-prev').style.opacity = index === 0 ? '0.5' : '1';
+
+            const btnNext = document.getElementById('btn-next');
+            if (index === questionsData.length - 1) {
+                btnNext.innerHTML = `Selesai <i class="fa-solid fa-check ml-2"></i>`;
+                btnNext.onclick = confirmFinishExam;
+            } else {
+                btnNext.innerHTML = `Berikutnya <i class="fa-solid fa-arrow-right ml-2"></i>`;
+                btnNext.onclick = nextQuestion;
+            }
+
+            // Update Tombol Ragu
+            updateFlagButtonState();
+            renderQuestionGrid();
+        }
+
+        function selectOption(optIdx) {
+            studentAnswers[currentQuestionIndex] = optIdx;
+            loadQuestion(currentQuestionIndex);
+        }
+
+        function nextQuestion() {
+            if (currentQuestionIndex < questionsData.length - 1) {
+                loadQuestion(currentQuestionIndex + 1);
+            }
+        }
+
+        function prevQuestion() {
+            if (currentQuestionIndex > 0) {
+                loadQuestion(currentQuestionIndex - 1);
+            }
+        }
+
+        function toggleFlag() {
+            flaggedQuestions[currentQuestionIndex] = !flaggedQuestions[currentQuestionIndex];
+            updateFlagButtonState();
+            renderQuestionGrid();
+        }
+
+        function updateFlagButtonState() {
+            const btnFlag = document.getElementById('btn-flag');
+            if (flaggedQuestions[currentQuestionIndex]) {
+                btnFlag.className = "flex-1 sm:flex-none px-4 py-2 bg-amber-500 text-white font-semibold rounded-xl text-xs sm:text-sm transition flex items-center justify-center shadow-sm";
+                btnFlag.innerHTML = `<i class="fa-solid fa-flag mr-2"></i> Ragu-Ragu (Ditandai)`;
+            } else {
+                btnFlag.className = "flex-1 sm:flex-none px-4 py-2 bg-amber-100 hover:bg-amber-200 text-amber-800 font-semibold rounded-xl text-xs sm:text-sm transition flex items-center justify-center";
+                btnFlag.innerHTML = `<i class="fa-solid fa-flag mr-2"></i> Ragu-Ragu`;
+            }
+        }
+
+        // Render Grid Navigasi Samping
+        function renderQuestionGrid() {
+            const grid = document.getElementById('question-grid');
+            grid.innerHTML = "";
+
+            let answeredCount = 0;
+
+            questionsData.forEach((_, idx) => {
+                const isAnswered = studentAnswers[idx] !== null;
+                const isFlagged = flaggedQuestions[idx];
+                const isActive = idx === currentQuestionIndex;
+
+                if (isAnswered) answeredCount++;
+
+                let bgClass = "bg-slate-200 text-slate-700 hover:bg-slate-300";
+                if (isAnswered) bgClass = "bg-emerald-500 text-white hover:bg-emerald-600";
+                if (isFlagged) bgClass = "bg-amber-400 text-white hover:bg-amber-500";
+                if (isActive) bgClass = "bg-blue-600 text-white ring-2 ring-blue-900";
+
+                const btn = document.createElement('button');
+                btn.className = `w-9 h-9 rounded-lg font-bold text-xs flex items-center justify-center transition shadow-sm ${bgClass}`;
+                btn.innerText = idx + 1;
+                btn.onclick = () => loadQuestion(idx);
+                grid.appendChild(btn);
+            });
+
+            document.getElementById('answered-counter').innerText = `${answeredCount} / 25 Terjawab`;
+        }
+
+        // Konfirmasi Selesai Ujian
+        function confirmFinishExam() {
+            const answeredCount = studentAnswers.filter(a => a !== null).length;
+            const unansweredCount = questionsData.length - answeredCount;
+            const flaggedCount = flaggedQuestions.filter(f => f).length;
+
+            document.getElementById('summary-answered').innerText = `${answeredCount} soal`;
+            document.getElementById('summary-unanswered').innerText = `${unansweredCount} soal`;
+            document.getElementById('summary-flagged').innerText = `${flaggedCount} soal`;
+
+            document.getElementById('page-exam').classList.add('hidden');
+            document.getElementById('page-confirm').classList.remove('hidden');
+        }
+
+        function returnToExam() {
+            document.getElementById('page-confirm').classList.add('hidden');
+            document.getElementById('page-exam').classList.remove('hidden');
+        }
+
+        // Penilaian Akhir & Rekap
+        function submitExamFinal() {
+            if (timerInterval) clearInterval(timerInterval);
+            examSubmitted = true;
+
+            // Hitung Skor
+            let correctCount = 0;
+            let wrongCount = 0;
+            let unansweredCount = 0;
+
+            questionsData.forEach((q, idx) => {
+                const ans = studentAnswers[idx];
+                if (ans === null) {
+                    unansweredCount++;
+                } else if (ans === q.answer) {
+                    correctCount++;
+                } else {
+                    wrongCount++;
+                }
+            });
+
+            // Bobot skor 4 per soal benar -> Maksimal 100
+            const finalScore = correctCount * 4;
+
+            // Tampilkan di Halaman Hasil
+            document.getElementById('res-name').innerText = studentData.name;
+            document.getElementById('res-class').innerText = studentData.class;
+            document.getElementById('res-absence').innerText = `Absen ${studentData.absence}`;
+            document.getElementById('res-number').innerText = studentData.number;
+            document.getElementById('res-score').innerText = finalScore;
+            document.getElementById('res-correct').innerText = correctCount;
+            document.getElementById('res-wrong').innerText = wrongCount;
+            document.getElementById('res-unanswered').innerText = unansweredCount;
+
+            const statusBadge = document.getElementById('res-status');
+            if (finalScore >= 75) {
+                statusBadge.className = "px-3 py-1 rounded-full text-xs font-semibold bg-emerald-100 text-emerald-800";
+                statusBadge.innerText = "Tuntas / Kompeten";
+            } else if (finalScore >= 60) {
+                statusBadge.className = "px-3 py-1 rounded-full text-xs font-semibold bg-amber-100 text-amber-800";
+                statusBadge.innerText = "Cukup / Perlu Remedial";
+            } else {
+                statusBadge.className = "px-3 py-1 rounded-full text-xs font-semibold bg-red-100 text-red-800";
+                statusBadge.innerText = "Belum Tuntas";
+            }
+
+            // Simpan ke localStorage rekap
+            saveResultToStorage({
+                name: studentData.name,
+                class: studentData.class,
+                absence: studentData.absence,
+                number: studentData.number,
+                correct: correctCount,
+                wrong: wrongCount,
+                unanswered: unansweredCount,
+                score: finalScore
+            });
+
+            // Sembunyikan konfirmasi, tampilkan hasil
+            document.getElementById('page-confirm').classList.add('hidden');
+            document.getElementById('page-result').classList.remove('hidden');
+        }
+
+        // LocalStorage Rekap Manajemen
+        function saveResultToStorage(resultObj) {
+            let records = JSON.parse(localStorage.getItem('asat_kimia_sman46_rekap') || '[]');
+            // Cek apakah peserta sudah pernah simpan, update atau push baru
+            records.push(resultObj);
+            localStorage.setItem('asat_kimia_sman46_rekap', JSON.stringify(records));
+            loadRecapTable();
+        }
+
+        function loadRecapFromStorage() {
+            loadRecapTable();
+        }
+
+        function loadRecapTable() {
+            let records = JSON.parse(localStorage.getItem('asat_kimia_sman46_rekap') || '[]');
+            const tbody = document.getElementById('recap-table-body');
+            tbody.innerHTML = "";
+
+            if (records.length === 0) {
+                tbody.innerHTML = `<tr><td colspan="7" class="p-4 text-center text-slate-500 italic">Belum ada data peserta yang menyelesaikan ujian.</td></tr>`;
+                return;
+            }
+
+            records.forEach((rec, idx) => {
+                const tr = document.createElement('tr');
+                tr.className = "border-b border-slate-200 hover:bg-slate-50";
+                tr.innerHTML = `
+                    <td class="p-3">${idx + 1}</td>
+                    <td class="p-3 font-semibold text-slate-800">${rec.name}</td>
+                    <td class="p-3">${rec.class}</td>
+                    <td class="p-3">${rec.absence}</td>
+                    <td class="p-3 text-center text-emerald-600 font-bold">${rec.correct}</td>
+                    <td class="p-3 text-center text-red-600 font-bold">${rec.wrong}</td>
+                    <td class="p-3 text-center font-bold text-blue-600">${rec.score}</td>
+                `;
+                tbody.appendChild(tr);
+            });
+        }
+
+        // Panel Guru Kontrol
+        function openTeacherModal() {
+            loadRecapTable();
+            document.getElementById('teacher-modal').classList.remove('hidden');
+        }
+
+        function closeTeacherModal() {
+            document.getElementById('teacher-modal').classList.add('hidden');
+        }
+
+        function updateDurationSetting() {
+            const val = parseInt(document.getElementById('setting-duration').value);
+            if (isNaN(val) || val < 10) {
+                alert("Durasi minimal adalah 10 menit.");
+                return;
+            }
+            examDurationSeconds = val * 60;
+            remainingSeconds = examDurationSeconds;
+            document.getElementById('display-duration').innerText = `${val} Menit`;
+            alert(`Durasi ujian berhasil diubah menjadi ${val} menit.`);
+            closeTeacherModal();
+        }
+
+        // Ekspor ke CSV
+        function exportCSV() {
+            let records = JSON.parse(localStorage.getItem('asat_kimia_sman46_rekap') || '[]');
+            if (records.length === 0) {
+                alert("Tidak ada data rekap untuk diekspor.");
+                return;
+            }
+
+            let csvContent = "data:text/csv;charset=utf-8,";
+            csvContent += "No,Nama Peserta,Kelas,Absen,Nomor Peserta,Jawaban Benar,Jawaban Salah,Tidak Dijawab,Nilai Akhir\n";
+
+            records.forEach((r, idx) => {
+                csvContent += `${idx + 1},"${r.name}","${r.class}",${r.absence},"${r.number}",${r.correct},${r.wrong},${r.unanswered},${r.score}\n`;
+            });
+
+            const encodedUri = encodeURI(csvContent);
+            const link = document.createElement("a");
+            link.setAttribute("href", encodedUri);
+            link.setAttribute("download", "Rekap_Nilai_ASAT_Kimia_SMAN46.csv");
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        }
+
+        function restartApp() {
+            window.location.reload();
+        }
+    </script>
+</body>
+</html>
